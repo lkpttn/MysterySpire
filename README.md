@@ -1,3 +1,5 @@
+![Header](docs/header.png)
+
 # MysterySpire
 
 A Slay the Spire 2 mod that hides map room icons — all rooms show the unknown `?` icon until you visit them. The legend is also renamed to "Cheatsheet" as a reminder that you're playing without it.
