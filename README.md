@@ -22,6 +22,10 @@ Visual only. Does not affect gameplay or saves — safe to add or remove mid-cam
 LD_PRELOAD=/usr/lib/libgcc_s.so.1 %command%
 ```
 
+## Uninstalling/disabling
+At this point in Early Access, there's not separate controls to enable or disable mods. When you run the game with mods it is a separate instance with it's own progression, unlocks and saved games. You can return to your normal setup by removing the `/mods` folder or renaming it to something like `/mods_disabled`.
+
+
 ## Building from source
 
 **Prerequisites:**
