@@ -1,0 +1,69 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<!-- Import user-specific paths -->
+	<Import Project="local.props" Condition="Exists('local.props')" />
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<PlatformTarget>x64</PlatformTarget>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<ModName>MysterySpire</ModName>
+		<ModDisplayName>MysterySpire</ModDisplayName>
+		<ModAuthor>Luke Patton</ModAuthor>
+		<ModVersion>1.0.0</ModVersion>
+
+		<AssemblyName>$(ModName)</AssemblyName>
+		<Version>$(ModVersion)</Version>
+
+		<!-- Fallback defaults if local.props missing -->
+		<STS2GamePath Condition="'$(STS2GamePath)' == ''">/home/luke/.steam/steam/steamapps/common/Slay the Spire 2</STS2GamePath>
+		<GodotExePath Condition="'$(GodotExePath)' == ''">godot</GodotExePath>
+
+		<!-- Derived paths -->
+		<ModsOutputDir>$(STS2GamePath)/mods/$(ModName)</ModsOutputDir>
+		<GameDataDir>$(STS2GamePath)/data_sts2_linuxbsd_x86_64</GameDataDir>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="decompiled/**/*.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="0Harmony">
+			<HintPath>$(GameDataDir)/0Harmony.dll</HintPath>
+		</Reference>
+		<Reference Include="GodotSharp">
+			<HintPath>$(GameDataDir)/GodotSharp.dll</HintPath>
+		</Reference>
+		<Reference Include="sts2">
+			<HintPath>$(GameDataDir)/sts2.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<!-- Generate mod_manifest.json before build -->
+	<Target Name="GenerateModManifest" BeforeTargets="BeforeBuild">
+		<PropertyGroup>
+			<ModManifestPath>$(ModsOutputDir)/mod_manifest.json</ModManifestPath>
+			<ModManifestContent>{
+  "id": "$(ModName)",
+  "pck_name": "$(ModName)",
+  "name": "$(ModDisplayName)",
+  "author": "$(ModAuthor)",
+  "version": "$(ModVersion)",
+  "has_dll": true,
+  "affects_gameplay": false
+}</ModManifestContent>
+		</PropertyGroup>
+
+		<MakeDir Directories="$(ModsOutputDir)" />
+		<WriteLinesToFile File="$(ModManifestPath)" Lines="$(ModManifestContent)" Overwrite="true" Encoding="UTF-8" />
+		<Message Text="Generated mod_manifest.json at $(ModManifestPath)" Importance="high" />
+	</Target>
+
+	<Target Name="PostBuild" AfterTargets="Build">
+		<MakeDir Directories="$(ModsOutputDir)" />
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModsOutputDir)" />
+		<Message Text="Copied $(ModName).dll to $(ModsOutputDir)" Importance="high" />
+	</Target>
+</Project>

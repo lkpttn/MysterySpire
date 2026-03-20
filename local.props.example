@@ -1,15 +1,13 @@
 <Project>
   <PropertyGroup>
-    <!-- COPY THIS FILE TO local.props AND EDIT YOUR PATHS -->
-    
     <!-- Path to your Slay the Spire 2 installation -->
-    <!-- Common locations:
-         C:\Program Files (x86)\Steam\steamapps\common\Slay the Spire 2
-    -->
-    <STS2GamePath>YOUR_STEAM_PATH\steamapps\common\Slay the Spire 2</STS2GamePath>
-    
-    <!-- Path to Godot 4.5.1 Mono executable -->
-    <!-- Download from: https://godotengine.org/download/archive/4.5.1-stable/ -->
-    <GodotExePath>YOUR_GODOT_PATH\Godot_v4.5.1-stable_mono_win64.exe</GodotExePath>
+    <!-- Windows: C:\Program Files (x86)\Steam\steamapps\common\Slay the Spire 2 -->
+    <!-- Linux:   /home/USERNAME/.steam/steam/steamapps/common/Slay the Spire 2 -->
+    <STS2GamePath>YOUR_STEAM_PATH/steamapps/common/Slay the Spire 2</STS2GamePath>
+
+    <!-- Path to Godot 4 Mono executable (only needed if building assets/PCK) -->
+    <!-- Windows: C:\tools\Godot_v4.6.1-stable_mono_win64.exe -->
+    <!-- Linux:   /home/USERNAME/tools/Godot_v4.6.1-stable_mono_linux_x86_64/Godot_v4.6.1-stable_mono_linux.x86_64 -->
+    <GodotExePath>YOUR_GODOT_PATH</GodotExePath>
   </PropertyGroup>
 </Project>

@@ -1,94 +1,52 @@
-# ExampleMod
+# MysterySpire
 
-Example mod for Slay the Spire 2!
+A Slay the Spire 2 mod that hides map room icons — all rooms show the unknown `?` icon until you visit them. The legend is also renamed to "Cheatsheet" as a reminder that you're playing without it.
 
----
+Visual only. Does not affect gameplay or saves — safe to add or remove mid-campaign.
 
+## Installation
 
-## Development Setup
+1. Download `MysterySpire.dll` and `mod_manifest.json` from [Releases](../../releases)
+2. Place both files into a `MysterySpire/` folder inside your STS2 mods directory:
+   ```
+   Steam/steamapps/common/Slay the Spire 2/mods/MysterySpire/
+   ├── MysterySpire.dll
+   └── mod_manifest.json
+   ```
+3. Launch the game — it will detect the mod automatically
 
-### Prerequisites
+**Linux only:** Add this to your Steam launch options (right-click STS2 → Properties → General):
+```
+LD_PRELOAD=/usr/lib/libgcc_s.so.1 %command%
+```
 
-Before you begin, ensure you have:
+## Building from source
 
-- [.NET 9.0 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
-- [Godot 4.5.1 Mono](https://godotengine.org/download/archive/4.5.1-stable/) - **Download the "Windows 64-bit, .NET" version**
+**Prerequisites:**
+- [.NET SDK 9+](https://dotnet.microsoft.com/download)
 - Slay the Spire 2 installed via Steam
 
----
+**Setup:**
 
-### Initial Configuration
-
-#### 1. Clone the Repository
-```bash
-git clone https://github.com/lamali292/sts2_example_mod.git
-cd sts2_example_mod
-```
-
-#### 2. Configure Your Paths
-
-**Windows (PowerShell):**
-```powershell
-Copy-Item local.props.example local.props
-```
-
-**Linux/Mac:**
-```bash
-cp local.props.example local.props
-```
-
-#### 3. Edit `local.props`
-
-Open `local.props` in any text editor and update with **your** paths:
+Copy `local.props.example` to `local.props` and fill in your paths:
 ```xml
 <Project>
   <PropertyGroup>
-    <!-- Example for default Steam installation: -->
-    <STS2GamePath>C:\Program Files (x86)\Steam\steamapps\common\Slay the Spire 2</STS2GamePath>
-    
-    <!-- Example Godot path: -->
-    <GodotExePath>C:\Godot\Godot_v4.5.1-stable_mono_win64.exe</GodotExePath>
+    <STS2GamePath>/path/to/Slay the Spire 2</STS2GamePath>
+    <GodotExePath>/path/to/Godot_mono_executable</GodotExePath>
   </PropertyGroup>
 </Project>
 ```
----
 
-### Building the Mod
+**Build:**
+```bash
+dotnet build MysterySpire.csproj
+```
 
-#### Visual Studio
-Open ExampleMod.csproj as Visual Studio Project
+The DLL and manifest are automatically copied to your mods folder on build.
 
-Press **Ctrl+Shift+B** or click **Build → Build Solution**
-
-
-The mod will **automatically** install to:
-
-Slay the Spire 2/mods/ExampleMod/  
-├── ExampleMod.dll  
-└── ExampleMod.pck  
-
-
-can be changed in ExampleMod.csproj 
-
-
----
-
-## Troubleshooting
-
-### "Cannot find Godot executable"
-- Make sure `GodotExePath` in `local.props` points to the `.exe` file
-- Download the **Mono** version, not the standard version
-
-### "Cannot find Slay the Spire 2"
-- Right-click STS2 in Steam → Manage → Browse local files
-- Copy the full path and paste into `STS2GamePath`
-
-### Build succeeds but mod doesn't load
-- Check that both `ExampleMod.dll` **AND** `ExampleMod.pck` exist in `mods/ExampleMod/`
-- Check the game's log file for errors: `%AppData%\Roaming\SlayTheSpire2\Player.log`
-
-### Changes don't appear in game
-- Rebuild the mod (**Ctrl+Shift+B**) or with Rebuild Solution
-- Restart Slay the Spire 2
-
----
+**To regenerate decompiled game source** (useful for finding new patch targets):
+```bash
+dotnet tool install ilspycmd -g --prerelease
+ilspycmd "data_sts2_linuxbsd_x86_64/sts2.dll" --outputdir decompiled --project
+```
