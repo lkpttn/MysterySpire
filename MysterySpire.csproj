@@ -11,7 +11,7 @@
 		<ModName>MysterySpire</ModName>
 		<ModDisplayName>MysterySpire</ModDisplayName>
 		<ModAuthor>Luke Patton</ModAuthor>
-		<ModVersion>1.0.0</ModVersion>
+		<ModVersion>1.0.1</ModVersion>
 
 		<AssemblyName>$(ModName)</AssemblyName>
 		<Version>$(ModVersion)</Version>
