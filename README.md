@@ -4,7 +4,7 @@
 
 A Slay the Spire 2 mod that hides map room icons — all rooms show the unknown `?` icon until you visit them. The legend is also renamed to "Cheatsheet" as a reminder that you're playing without it.
 
-Visual only. Does not affect gameplay or saves — safe to add or remove mid-campaign.
+Visual only. Does not affect gameplay or room generation.
 
 ## Installation
 
@@ -23,36 +23,6 @@ LD_PRELOAD=/usr/lib/libgcc_s.so.1 %command%
 ```
 
 ## Uninstalling/disabling
-At this point in Early Access, there's not separate controls to enable or disable mods. When you run the game with mods it is a separate instance with it's own progression, unlocks and saved games. You can return to your normal setup by removing the `/mods` folder or renaming it to something like `/mods_disabled`.
+At this point in Early Access, when you run the game with mods it is a separate instance with it's own progression, unlocks and saved games. Mods can be enabled and disabled in the Settings, under the Mod Settings submenu. You'll need to restart your client for changes to take effect.
 
-
-## Building from source
-
-**Prerequisites:**
-- [.NET SDK 9+](https://dotnet.microsoft.com/download)
-- Slay the Spire 2 installed via Steam
-
-**Setup:**
-
-Copy `local.props.example` to `local.props` and fill in your paths:
-```xml
-<Project>
-  <PropertyGroup>
-    <STS2GamePath>/path/to/Slay the Spire 2</STS2GamePath>
-    <GodotExePath>/path/to/Godot_mono_executable</GodotExePath>
-  </PropertyGroup>
-</Project>
-```
-
-**Build:**
-```bash
-dotnet build MysterySpire.csproj
-```
-
-The DLL and manifest are automatically copied to your mods folder on build.
-
-**To regenerate decompiled game source** (useful for finding new patch targets):
-```bash
-dotnet tool install ilspycmd -g --prerelease
-ilspycmd "data_sts2_linuxbsd_x86_64/sts2.dll" --outputdir decompiled --project
-```
+You can uninstall the mod by deleting the files or removing them from the `mods` folder.
