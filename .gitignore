@@ -11,6 +11,9 @@ decompiled/
 # Release packages
 dist/
 
+# Workshop upload content is regenerated from the build output before each upload
+workshop/content/
+
 # VS/Rider
 .vs/
 .idea/

@@ -1,0 +1,9 @@
+{
+  "title": "MysterySpire",
+  "description": "Hides map room icons — all rooms show the unknown '?' icon until you visit them. The legend is also renamed to \"Cheatsheet\" as a reminder that you're playing without it.\n\nVisual only. Does not affect gameplay or saves — safe to add or remove mid-campaign.",
+  "visibility": "private",
+  "changeNote": "Initial release",
+  "tags": [],
+  "dependencies": [],
+  "contentDescriptors": []
+}
